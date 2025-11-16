@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madiha Ferdous - Front-End Developer</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Custom underline animation for titles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background-color: #3B82F6; /* Tailwind blue-500 */
+            bottom: 0;
+            left: 25%;
+            border-radius: 2px;
+        }
+        
+        /* Blob shape for profile image */
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transition: all 1s ease-in-out;
+        }
+        .blob-shape:hover {
+            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+        }
+
+        /* Chat Widget Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .chat-animate {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        .typing-dot {
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 relative">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/Name -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-gray-900 hover:text-blue-600 transition">
+                        Madiha Ferdous
+                    </a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">Home</a>
+                        <a href="#about" class="hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">About</a>
+                        <a href="#skills" class="hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">Skills</a>
+                        <a href="#projects" class="hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">Projects</a>
+                        <a href="#education" class="hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">Education</a>
+                        <a href="#contact" class="hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-white border-t" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block hover:text-blue-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="block hover:text-blue-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#skills" class="block hover:text-blue-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium">Skills</a>
+                <a href="#projects" class="block hover:text-blue-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#education" class="block hover:text-blue-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium">Education</a>
+                <a href="#contact" class="block hover:text-blue-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home / Hero Section -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 px-4 bg-gradient-to-b from-blue-50 to-white">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between">
+            <div class="md:w-1/2 text-center md:text-left mt-10 md:mt-0">
+                <h2 class="text-xl md:text-2xl font-semibold text-gray-600 mb-2">Hi,</h2>
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+                    I'm <span class="text-blue-600">Madiha</span><br>Ferdous
+                </h1>
+                <p class="text-2xl md:text-3xl font-bold text-gray-800 mb-8">Front-End Developer</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                    <button onclick="scrollToSection('contact')" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition transform hover:-translate-y-1">
+                        Hire Me
+                    </button>
+                    <a href="Madiha Ferdous CV.pdf" target="_blank" class="bg-white hover:bg-gray-50 text-blue-600 font-semibold py-3 px-8 rounded-lg border-2 border-blue-600 shadow-lg transition transform hover:-translate-y-1">
+                        Download CV <i class="fas fa-download ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:w-1/2 flex justify-center md:justify-end relative">
+                <!-- Profile Image Background Blob -->
+                <div class="absolute w-72 h-72 md:w-96 md:h-96 bg-blue-200 rounded-full filter blur-3xl opacity-30 -z-10 top-0 right-10"></div>
+                <!-- Placeholder Profile Image -->
+                <div class="w-64 h-64 md:w-80 md:h-80 bg-gray-200 blob-shape overflow-hidden shadow-2xl border-4 border-white relative group">
+                    <img src="Profile.jpg" alt="Profile" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-600 section-title">About</h2>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/3">
+                    <div class="rounded-2xl overflow-hidden shadow-xl rotate-3 hover:rotate-0 transition duration-500 border-8 border-gray-50">
+                         <!-- Using a generic tech person image -->
+                        <img src="about.jpg" alt="About Me" class="w-full h-auto">
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 text-lg text-gray-600 leading-relaxed">
+                    <p class="mb-6">
+                        I'm <span class="font-bold text-gray-900">Madiha Ferdous</span>, a Computer Science graduate passionate about <span class="text-blue-600 font-semibold">Front-End Development</span>.
+                    </p>
+                    <p class="mb-6">
+                        I specialize in building stunning, user-friendly web interfaces. I focus on creating responsive, accessible, and performant web applications, translating creative designs into clean, efficient code using modern technologies.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                        <div class="bg-blue-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-code text-blue-600 text-2xl mb-2"></i>
+                            <p class="font-bold text-gray-800">Frontend Dev</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-universal-access text-blue-600 text-2xl mb-2"></i>
+                            <p class="font-bold text-gray-800">Accessibility</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-mobile-alt text-blue-600 text-2xl mb-2"></i>
+                            <p class="font-bold text-gray-800">Responsive</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg text-center">
+                            <i class="fas fa-rocket text-blue-600 text-2xl mb-2"></i>
+                            <p class="font-bold text-gray-800">Performance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-600 section-title">Skills</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Technical Skills Column -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center md:text-left flex items-center gap-2 justify-center md:justify-start">
+                        <i class="fas fa-code text-blue-600"></i> Hard Skills (Technical)
+                    </h3>
+                    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                        <span class="bg-white text-gray-800 px-5 py-3 rounded-lg shadow-sm font-semibold border border-gray-100 flex items-center gap-2 hover:shadow-md hover:border-blue-200 transition cursor-default">
+                            <i class="fab fa-html5 text-orange-600 text-xl"></i> HTML & CSS
+                        </span>
+                        <span class="bg-white text-gray-800 px-5 py-3 rounded-lg shadow-sm font-semibold border border-gray-100 flex items-center gap-2 hover:shadow-md hover:border-blue-200 transition cursor-default">
+                            <i class="fab fa-js text-yellow-400 text-xl"></i> JavaScript
+                        </span>
+                        <span class="bg-white text-gray-800 px-5 py-3 rounded-lg shadow-sm font-semibold border border-gray-100 flex items-center gap-2 hover:shadow-md hover:border-blue-200 transition cursor-default">
+                            <i class="fas fa-database text-blue-600 text-xl"></i> MySQL
+                        </span>
+                        <span class="bg-white text-gray-800 px-5 py-3 rounded-lg shadow-sm font-semibold border border-gray-100 flex items-center gap-2 hover:shadow-md hover:border-blue-200 transition cursor-default">
+                            <i class="fab fa-react text-cyan-400 text-xl"></i> React
+                        </span>
+                        <span class="bg-white text-gray-800 px-5 py-3 rounded-lg shadow-sm font-semibold border border-gray-100 flex items-center gap-2 hover:shadow-md hover:border-blue-200 transition cursor-default">
+                            <i class="fab fa-github text-gray-900 text-xl"></i> Git/GitHub
+                        </span>
+                        <span class="bg-white text-gray-800 px-5 py-3 rounded-lg shadow-sm font-semibold border border-gray-100 flex items-center gap-2 hover:shadow-md hover:border-blue-200 transition cursor-default">
+                            <i class="fas fa-robot text-purple-600 text-xl"></i> AI Tools
+                        </span>
+                         <span class="bg-white text-gray-800 px-5 py-3 rounded-lg shadow-sm font-semibold border border-gray-100 flex items-center gap-2 hover:shadow-md hover:border-blue-200 transition cursor-default">
+                            <i class="fas fa-bug text-red-500 text-xl"></i> Debugging
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Soft Skills Column -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center md:text-left flex items-center gap-2 justify-center md:justify-start">
+                        <i class="fas fa-users text-blue-600"></i> Soft Skills & Leadership
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center text-blue-600">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <span class="font-semibold text-gray-700">Problem Solving</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-green-600">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <span class="font-semibold text-gray-700">Team Collaboration</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition flex items-center gap-3">
+                            <div class="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center text-purple-600">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <span class="font-semibold text-gray-700">Time Management</span>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition flex items-center gap-3">
+                            <div class="w-10 h-10 bg-pink-50 rounded-full flex items-center justify-center text-pink-600">
+                                <i class="fas fa-sync"></i>
+                            </div>
+                            <span class="font-semibold text-gray-700">Adaptability</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-600 section-title">Projects</h2>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition transform hover:-translate-y-1">
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <div class="p-3 bg-blue-100 rounded-lg mr-4">
+                                    <i class="fas fa-laptop-code text-blue-600 text-2xl"></i>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800">Personal Portfolio Website</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            A responsive personal portfolio website designed to showcase skills, projects, and education. Features a clean modern UI, smooth scrolling, and an integrated AI chat assistant.
+                        </p>
+                        
+                        <!-- Image Gallery -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <img src="P1.png" onclick="openLightbox(this.src)" alt="Project Screenshot 1" class="rounded-lg border border-gray-200 w-full h-32 object-cover hover:opacity-90 transition cursor-pointer hover:scale-105 transform duration-200">
+                            <img src="P2.png" onclick="openLightbox(this.src)" alt="Project Screenshot 2" class="rounded-lg border border-gray-200 w-full h-32 object-cover hover:opacity-90 transition cursor-pointer hover:scale-105 transform duration-200">
+                            <img src="P3.png" onclick="openLightbox(this.src)" alt="Project Screenshot 3" class="rounded-lg border border-gray-200 w-full h-32 object-cover hover:opacity-90 transition cursor-pointer hover:scale-105 transform duration-200">
+                            <img src="P4.png" onclick="openLightbox(this.src)" alt="Project Screenshot 4" class="rounded-lg border border-gray-200 w-full h-32 object-cover hover:opacity-90 transition cursor-pointer hover:scale-105 transform duration-200">
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded">HTML5</span>
+                            <span class="bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded">Tailwind CSS</span>
+                            <span class="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded">JavaScript</span>
+                            <span class="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded">Gemini API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-600 section-title">Education</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Edu Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition border-b-4 border-blue-500 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-600 mb-2">Bachelor of Science (BSc) in Computer Science & Engineering</h3>
+                        <p class="font-semibold text-gray-800 mb-4">American International University-Bangladesh (AIUB), Dhaka</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                        <span class="text-gray-500 text-sm">Oct 2024 - Present</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">CGPA: 3.77</span>
+                    </div>
+                </div>
+
+                <!-- Edu Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition border-b-4 border-blue-500 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-600 mb-2">Higher Secondary Certificate (HSC)</h3>
+                        <p class="font-semibold text-gray-800 mb-4">Panchagarh Govt. Girls’ High School, Panchagarh</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                        <span class="text-gray-500 text-sm">Mar 2022 - Oct 2023</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">GPA: 5.00</span>
+                    </div>
+                </div>
+
+                <!-- Edu Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition border-b-4 border-blue-500 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-600 mb-2">Secondary School Certificate (SSC)</h3>
+                        <p class="font-semibold text-gray-800 mb-4">Panchagarh Govt. Women’s College, Panchagarh</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-gray-100">
+                        <span class="text-gray-500 text-sm">Jan 2016 - Dec 2021</span>
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">GPA: 4.92</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-600 section-title">Contact</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg">
+                    <form onsubmit="handleFormSubmit(event)">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Your Name">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Your Email">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-semibold mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" placeholder="Your Message"></textarea>
+                        </div>
+                        <div class="flex gap-4">
+                            <button type="submit" class="bg-gray-900 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-800 transition">Send Message</button>
+                            <button type="reset" class="bg-transparent text-gray-600 font-bold py-3 px-8 rounded-lg border border-gray-300 hover:bg-gray-100 transition">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="flex flex-col justify-center">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Reach out to me</h3>
+                    <p class="text-gray-600 mb-8 text-lg">
+                        I'm open to freelancing, collaboration, and full-time opportunities. Typically reply within 2–3 days.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span class="text-lg text-gray-700">ferdousmadiha@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mr-4">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <span class="text-lg text-gray-700">+880 1234 567 890</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <span class="text-lg text-gray-700">Dhaka, Bangladesh</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="flex gap-4 mt-10">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-blue-600 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-900 hover:text-white transition">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.facebook.com/madiha.ferdous.503" target="_blank" class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-blue-700 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 pb-24">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-600">© 2025 Madiha Ferdous. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Widget -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+        <!-- Chat Window -->
+        <div id="chat-window" class="hidden bg-white w-80 sm:w-96 rounded-2xl shadow-2xl border border-gray-200 mb-4 overflow-hidden flex flex-col chat-animate" style="height: 500px; max-height: 80vh;">
+            <!-- Header -->
+            <div class="bg-blue-600 p-4 flex justify-between items-center text-white">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-robot"></i>
+                    <span class="font-bold">Ask Madiha's AI</span>
+                </div>
+                <button onclick="toggleChat()" class="hover:bg-blue-700 p-1 rounded"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <!-- Messages Area -->
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-gray-50 space-y-4">
+                <!-- Welcome Message -->
+                <div class="flex items-start">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-2 flex-shrink-0">
+                        <i class="fas fa-robot text-sm"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-r-xl rounded-bl-xl shadow-sm border border-gray-100 text-sm text-gray-700">
+                        Hi! I'm an AI trained on Madiha's portfolio. Ask me about her skills, projects, or experience!
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 bg-white border-t border-gray-100">
+                <form onsubmit="handleChatSubmit(event)" class="flex gap-2">
+                    <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:border-blue-500" placeholder="Ask a question..." autocomplete="off">
+                    <button type="submit" class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition shadow-md">
+                        <i class="fas fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Floating Button -->
+        <button onclick="toggleChat()" class="w-14 h-14 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition transform hover:scale-110 flex items-center justify-center">
+            <i class="fas fa-comment-alt text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Lightbox Modal (Full Screen Image View) -->
+    <div id="lightbox" class="fixed inset-0 z-[60] hidden bg-black bg-opacity-90 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300" onclick="closeLightbox()">
+        <div class="relative max-w-4xl max-h-full w-full flex items-center justify-center">
+            <img id="lightbox-img" src="" alt="Full Screen View" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl transform transition-all duration-300 scale-95 opacity-0 object-contain" onclick="event.stopPropagation()">
+            <button class="absolute -top-10 right-0 text-white text-4xl hover:text-gray-300 focus:outline-none transition" onclick="closeLightbox()">&times;</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // --- Global Config ---
+        const apiKey = ""; // Gemini API Key (injected by environment)
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+        // --- Mobile Menu & Scroll Logic (Existing) ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const btn = event.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Sending...";
+            btn.classList.add('opacity-75');
+            setTimeout(() => {
+                btn.innerText = "Message Sent!";
+                btn.classList.remove('opacity-75');
+                btn.classList.remove('bg-gray-900');
+                btn.classList.add('bg-green-600');
+                setTimeout(() => {
+                    event.target.reset();
+                    btn.innerText = originalText;
+                    btn.classList.remove('bg-green-600');
+                    btn.classList.add('bg-gray-900');
+                }, 3000);
+            }, 1500);
+        }
+
+        // --- Lightbox Logic ---
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            
+            // Prevent scrolling on body
+            document.body.style.overflow = 'hidden';
+
+            // Small timeout to allow display:flex to apply before adding opacity/scale classes for transition
+            setTimeout(() => {
+                lightboxImg.classList.remove('scale-95', 'opacity-0');
+                lightboxImg.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.classList.remove('scale-100', 'opacity-100');
+            lightboxImg.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightboxImg.src = '';
+                document.body.style.overflow = 'auto'; // Restore scrolling
+            }, 300); // Match transition duration
+        }
+
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+        });
+
+        // --- Gemini API Helper Function ---
+        async function callGeminiAPI(prompt) {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }]
+                    })
+                });
+
+                if (!response.ok) throw new Error('API Call Failed');
+                const data = await response.json();
+                return data.candidates[0].content.parts[0].text;
+            } catch (error) {
+                console.error(error);
+                return "Sorry, I encountered a temporary error. Please try again.";
+            }
+        }
+
+        // --- Feature 1: Chat Widget Logic ---
+        
+        // Context Gathering (reads the page content for the AI)
+        function getPageContext() {
+            const mainContent = document.body.innerText;
+            // Clean up excessive whitespace
+            return mainContent.replace(/\s+/g, ' ').substring(0, 20000); 
+        }
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chat-window');
+            chatWindow.classList.toggle('hidden');
+            if (!chatWindow.classList.contains('hidden')) {
+                document.getElementById('chat-input').focus();
+            }
+        }
+
+        function appendMessage(text, sender) {
+            const chatMessages = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            
+            if (sender === 'user') {
+                div.className = 'flex items-end justify-end';
+                div.innerHTML = `
+                    <div class="bg-blue-600 text-white p-3 rounded-l-xl rounded-br-xl shadow-md text-sm max-w-[85%]">
+                        ${text}
+                    </div>
+                `;
+            } else {
+                div.className = 'flex items-start';
+                div.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-2 flex-shrink-0">
+                        <i class="fas fa-robot text-sm"></i>
+                    </div>
+                    <div class="bg-white p-3 rounded-r-xl rounded-bl-xl shadow-sm border border-gray-100 text-sm text-gray-700 max-w-[85%] prose prose-sm">
+                        ${marked.parse(text)}
+                    </div>
+                `;
+            }
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const chatMessages = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.id = 'typing-indicator';
+            div.className = 'flex items-start';
+            div.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-2 flex-shrink-0">
+                    <i class="fas fa-robot text-sm"></i>
+                </div>
+                <div class="bg-white p-4 rounded-r-xl rounded-bl-xl shadow-sm border border-gray-100 flex gap-1">
+                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                    <div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>
+                </div>
+            `;
+            chatMessages.appendChild(div);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTyping() {
+            const typing = document.getElementById('typing-indicator');
+            if (typing) typing.remove();
+        }
+
+        async function handleChatSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // User Message
+            appendMessage(message, 'user');
+            input.value = '';
+            
+            // AI Processing
+            showTyping();
+
+            const context = getPageContext();
+            const systemPrompt = `
+                You are an AI assistant for Madiha Ferdous's portfolio website. 
+                Your goal is to answer visitor questions professionally and enthusiastically based strictly on the following website content.
+                
+                WEBSITE CONTENT:
+                ${context}
+
+                INSTRUCTIONS:
+                1. Answer in the first person plural ("We" or "Madiha") or third person ("Madiha is...").
+                2. Keep answers concise (under 3 sentences if possible).
+                3. If the answer isn't in the content, say "I don't have that info, but you can contact Madiha directly!"
+                4. Be friendly and helpful.
+                
+                USER QUESTION: ${message}
+            `;
+
+            const response = await callGeminiAPI(systemPrompt);
+            removeTyping();
+            appendMessage(response, 'ai');
+        }
+
+
+        // --- Feature 2: Project Analyzer Logic ---
+
+        async function analyzeProject(button) {
+            const card = button.closest('.project-card');
+            const title = card.dataset.title;
+            const desc = card.dataset.desc;
+            const tech = card.dataset.tech;
+            const outputDiv = card.querySelector('.ai-output');
+
+            // UI Loading State
+            const originalBtnText = button.innerHTML;
+            button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Analyzing...`;
+            button.disabled = true;
+
+            const prompt = `
+                Analyze this software project from a portfolio:
+                Title: ${title}
+                Description: ${desc}
+                Tech Stack: ${tech}
+
+                Output a JSON object with exactly two keys:
+                1. "impact": A 1-sentence explaination of the real-world value of this project.
+                2. "feature": A creative idea for a future feature to add to this project.
+                
+                Do not use Markdown formatting. Just raw JSON.
+            `;
+
+            try {
+                const responseText = await callGeminiAPI(prompt);
+                
+                // Clean markdown if Gemini adds it
+                const cleanedText = responseText.replace(/```json/g, '').replace(/```/g, '');
+                const data = JSON.parse(cleanedText);
+
+                outputDiv.innerHTML = `
+                    <div class="mb-2"><strong class="text-purple-700">🚀 Real-world Impact:</strong> ${data.impact}</div>
+                    <div><strong class="text-pink-600">💡 Future Idea:</strong> ${data.feature}</div>
+                `;
+                outputDiv.classList.remove('hidden');
+                outputDiv.classList.add('chat-animate');
+
+            } catch (e) {
+                outputDiv.innerHTML = `<span class="text-red-500">Failed to analyze. Try again!</span>`;
+                outputDiv.classList.remove('hidden');
+            } finally {
+                button.innerHTML = originalBtnText;
+                button.disabled = false;
+            }
+        }
+
+    </script>
+</body>
+</html>
